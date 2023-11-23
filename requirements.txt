@@ -1,0 +1,8 @@
+dbt-core==1.6.0
+
+dbt-duckdb==1.6.0
+duckcli>=0.2.1
+
+dbt-bigquery==1.6.0
+sqlfluff>=2.3.2
+sqlfluff-templater-dbt>=2.3.2

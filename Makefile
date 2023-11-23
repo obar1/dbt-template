@@ -11,5 +11,6 @@ run:
 	dbt run
 
 format:
-	sqlfluff fix --dialect duckdb --force --templater=jinja .
+	# sqlfluff fix --dialect duckdb --force --templater=jinja .
+	echo 'TODO:'
 

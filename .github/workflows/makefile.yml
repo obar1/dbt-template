@@ -11,7 +11,7 @@ jobs:
     - name: install packages
       run: make install
     - name: load raw data
-      run: loaddb0
+      run: make loaddb0
     - name: build models
       run: make run
     - name: test models

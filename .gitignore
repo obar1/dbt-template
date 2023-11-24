@@ -7,3 +7,5 @@ target/**
 .user.yml
 
 tmp
+
+dbt_packages

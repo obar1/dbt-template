@@ -14,3 +14,14 @@ models:
         description: ""
         tests:
           - not_null
+  - name: adult_cleaned
+    tests:
+    - dbt_utils.expression_is_true:
+        expression: "capital_loss is not null or capital_gain is not null"
+    columns:
+      - name: sex
+        tests:
+          - accepted_values:
+              values: ['Male','Female']
+      - name: capital_gain
+      - name: capital_loss

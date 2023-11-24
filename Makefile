@@ -17,6 +17,6 @@ run:
 	dbt run
 
 format:
-	sqlfluff lint
+	sqlfluff fix -f 
 
 

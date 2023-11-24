@@ -1,0 +1,16 @@
+models:
+  - name: iris_cleaned
+    description: "iris cleaned"
+    columns:
+      - name: sepal_length
+        description: ""
+      - name: sepal_width
+        description: ""
+      - name: petal_length
+        description: ""
+      - name: petal_width
+        description: ""
+      - name: class
+        description: ""
+        tests:
+          - not_null

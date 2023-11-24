@@ -1,9 +1,35 @@
+
 [sqlfluff]
 templater = dbt
 dialect = duckdb
+max_line_length = 119
+rules = core
 
-[sqlfluff:templater:dbt]
-profile = dbt_pipes
-profiles_dir = .
-project_dir = .
-target = dev
+[sqlfluff:indentation]
+indented_joins = True
+indented_using_on = False
+template_blocks_indent = True
+
+[sqlfluff:layout:type:comma]
+spacing_before = touch
+line_position = trailing
+
+[sqlfluff:templater]
+unwrap_wrapped_queries = True
+
+[sqlfluff:templater:jinja]
+apply_dbt_builtins = True
+
+# For rule specific configuration, use dots between the names exactly
+# as you would in .sqlfluff. In the background, SQLFluff will unpack the
+# configuration paths accordingly.
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+[sqlfluff:rules:capitalisation.identifiers]
+capitalisation_policy = upper
+[sqlfluff:rules:capitalisation.functions]
+extended_capitalisation_policy = upper
+[sqlfluff:rules:capitalisation.literals]
+capitalisation_policy = lower
+[sqlfluff:rules:capitalisation.types]
+extended_capitalisation_policy = upper

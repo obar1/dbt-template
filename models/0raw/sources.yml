@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: db  
+    schema: main  
+    tables:
+      - name: iris_raw
+      - name: wine_raw

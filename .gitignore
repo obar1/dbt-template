@@ -1,6 +1,9 @@
 .venv
 *.duckdb
+*.duckdb.*
+
 logs/**
 target/**
 .user.yml
+
 tmp

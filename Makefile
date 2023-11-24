@@ -2,7 +2,7 @@ venv0:
 	python -m venv .venv
 
 loaddb0:
-	echo 'build db.duckdb'
+	python py_scripts/build_db.py 
 
 connectdb0:
 	duckcli db.duckdb 	

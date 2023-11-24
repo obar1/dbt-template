@@ -12,7 +12,9 @@ jobs:
       run: make install
     - name: load raw data
       run: make loaddb0
-    - name: dbt deps && dbt build 
+    - name: |
+        dbt deps \
+        dbt build 
       run: dbt build
     - name: check format
       run: make format

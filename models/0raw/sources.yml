@@ -7,3 +7,4 @@ sources:
     tables:
       - name: iris_raw
       - name: wine_raw
+      - name: adult_raw

@@ -1,4 +1,3 @@
-
 {% set actual=ref('iris_model') %}
 
 {% set expected=ref('qa_expected_iris_model') %}

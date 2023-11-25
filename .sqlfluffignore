@@ -1,4 +1,4 @@
-Makefile
+./Makefile
 README.md
 analyses
 db.duckdb

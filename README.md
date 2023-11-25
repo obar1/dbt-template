@@ -44,8 +44,8 @@ make connectdb0
 
 ## a bit more advanced usage
 
-- looks at the usage of the seeds prefixed with `qa_expected...`, each of them are used in the test to have some minimla **regresion test** ...
-> if you change your models and you have no way to test the other dependecies you are going to do quite a `$hiTTy JOB$`
+- look at the usage of the seeds prefixed by `qa_expected...`, each of them are used in the test folder to have some minimal **regression test** ...
+> without them, if you change your models you are going to do quite a `$hiTTy JOB$` as other dependencie might break, it's like actual and expected in pytest...
 
 ## dbt extensions
 

@@ -1,10 +1,9 @@
-
 WITH source AS (
-    {% if var('MODE')  == 'QA' %}
-SELECT * FROM {{ ref('qa_iris_raw') }}
+{% if var('MODE')  == 'QA' %}
+    SELECT * FROM {{ ref('qa_iris_raw') }}
 {% else %}
-        SELECT * FROM {{ source('raw', 'iris_raw') }}
-    {% endif %}
+    SELECT * FROM {{ source('raw', 'iris_raw') }}
+{% endif %}
 ),
 
 renamed AS (

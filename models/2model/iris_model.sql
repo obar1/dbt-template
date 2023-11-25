@@ -1,6 +1,5 @@
 SELECT
-    *,
-    {{ iris_attrs('class', 'sepal_area', 'petal_ratio') }}
+    *, {{ iris_attrs('class', 'sepal_area', 'petal_ratio') }}
 FROM (
     SELECT
         class,

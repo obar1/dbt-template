@@ -1,9 +1,10 @@
 
 [sqlfluff]
-templater = dbt
+templater = jinja
 dialect = duckdb
 max_line_length = 119
 rules = core
+exclude_rules = JJ01, LT02, CV03
 
 [sqlfluff:indentation]
 indented_joins = True

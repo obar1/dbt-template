@@ -6,11 +6,11 @@ simple dbt project template with some models
 - load some data from http://archive.ics.uci.edu/ to local duckdb
 - simple dataflow using `dbt`
 
-## setup 
+## makefile intreface for cmd line usage
 
 use makefile [here](./Makefile)
 
-## example of usage
+## basic usage
 
 - load sample data in local db
 ```shell
@@ -41,6 +41,11 @@ make connectdb0
 ![Alt text](others/image-5.png)
 
 > do the same for wine ... :)
+
+## a bit more advanced usage
+
+- looks at the usage of the seeds prefixed with `qa_expected...`, each of them are used in the test to have some minimla **regresion test** ...
+> if you change your models and you have no way to test the other dependecies you are going to do quite a `$hiTTy JOB$`
 
 ## dbt extensions
 

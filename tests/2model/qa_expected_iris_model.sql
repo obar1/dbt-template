@@ -12,3 +12,6 @@
 {% endif %}
 
 WHERE percent_of_total < 100
+{#
+    TODO: conver this logic to a macro to encapsulate the logic
+#}

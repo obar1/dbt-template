@@ -1,4 +1,4 @@
-name: dbt template CI
+name: dbt template CI on github
 
 on: [push]
 

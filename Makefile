@@ -11,11 +11,11 @@ install:
 	pip install --upgrade pip && pip install -r requirements.txt
 
 test:
-	dbt test
+	dbt build --vars '{MODE:  QA}'
 
 run:
-	dbt run
-
+	dbt build --vars '{MODE:  DEV}'
+	
 format:
 	sqlfluff fix -f 
 

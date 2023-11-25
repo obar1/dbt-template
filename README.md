@@ -1,6 +1,6 @@
 # dbt-template
 
-[![Makefile CI](https://github.com/obar1/pyproject-template/actions/workflows/makefile.yml/badge.svg)](https://github.com/obar1/pyproject-template/actions/workflows/makefile.yml)
+[![dbt template CI on github](https://github.com/obar1/dbt-template/actions/workflows/makefile.yml/badge.svg)](https://github.com/obar1/dbt-template/actions/workflows/makefile.yml)
 
 simple dbt project template with some models
 - load some data from http://archive.ics.uci.edu/ to local duckdb

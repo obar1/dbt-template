@@ -15,7 +15,7 @@ jobs:
     - name: dbt deps
       run: dbt deps
     - name: test
-      run: dbt build --vars '{MODE:  QA}'
+      run: dbt build --vars "{'MODE':'QA'}"
     - name: check format
       run: make format
     - name: update models

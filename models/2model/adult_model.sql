@@ -10,5 +10,5 @@ SELECT
     capital_loss,
     native_country,
     income,
-    {{ convert_income('income') }}_converted
+    {{ convert_income('income') }} as income_converted
 FROM {{ ref('adult_cleaned') }}

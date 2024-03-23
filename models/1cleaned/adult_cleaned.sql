@@ -26,6 +26,8 @@ native-country: United-States, Cambodia, England, Puerto-Rico, Canada, Germany, 
 )}}
 
 select
+    _ts,
+
     cast(column00 as int) as age,
     trim(column01) as workclass,
     cast(column02 as float) as fnlwgt,

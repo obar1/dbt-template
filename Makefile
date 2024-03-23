@@ -11,7 +11,7 @@ install:
 	pip install --upgrade pip && pip install -r requirements.txt
 
 qa:
-	dbt build --vars '{MODE:  QA}'
+	dbt build --vars '{MODE:  QA}' --full-refresh
 
 run0:
 	dbt build --vars '{MODE:  DEV}' --full-refresh

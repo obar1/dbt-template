@@ -13,7 +13,10 @@
 
 #}
 select
-    current_timestamp as _ts,
+{% if var('MODE')  == 'DEV' %}
+        current_timestamp as _ts,
+{% endif %}
+
     cast(column0 as float) as sepal_length,
     cast(column1 as float) as sepal_width,
     cast(column2 as float) as petal_length,

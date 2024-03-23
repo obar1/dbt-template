@@ -1,15 +1,19 @@
-{{
-    config(
-        materialized='incremental',
-        unique_key='_ts'
-    )
-}}
+{% if var('MODE')  == 'DEV' %}
+    {{
+        config(
+            materialized='incremental',
+            unique_key='_ts'
+        )
+    }}
+{% endif %}
 
 select
     *, {{ iris_attrs('class', 'sepal_area', 'petal_ratio') }}
 from (
     select
-        _ts,
+{% if var('MODE')  == 'DEV' %}
+        current_timestamp as _ts,
+{% endif %}
         class,
         sepal_length,
         sepal_width,

@@ -9,3 +9,5 @@ target/**
 tmp
 
 dbt_packages
+
+export_edw

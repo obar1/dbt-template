@@ -10,12 +10,14 @@ connectdb0:
 install:
 	pip install --upgrade pip && pip install -r requirements.txt
 
-test:
+qa:
 	dbt build --vars '{MODE:  QA}'
 
-run:
-	dbt build --vars '{MODE:  DEV}'
-	
+run0:
+	dbt build --vars '{MODE:  DEV}' --full-refresh
+run1:
+	dbt run --vars '{MODE:  DEV}'
+
 format:
 	sqlfluff fix -f 
 

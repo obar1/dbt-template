@@ -23,10 +23,12 @@ from (
         {{ dbt_utils.safe_divide('petal_length', 'petal_width') }} as petal_ratio
 
     from {{ ref('iris_cleaned') }}
+    {% if var('MODE')  == 'DEV' %}
 {% if is_incremental() %}
 
   -- this filter will only be applied on an incremental run
   where _ts >= (select max(_ts) from {{ this }})
 
+{% endif %}
 {% endif %}
 )

@@ -23,4 +23,4 @@ renamed as (
     from source
 )
 
-select *,        current_timestamp as _ts from renamed
+select *, current_timestamp as _ts from renamed

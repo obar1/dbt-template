@@ -1,9 +1,9 @@
-WITH source AS (
-    SELECT * FROM {{ source('raw', 'adult_raw') }}
+with source as (
+    select * from {{ source('raw', 'adult_raw') }}
 ),
 
-renamed AS (
-    SELECT
+renamed as (
+    select
         {{ adapter.quote("column00") }},
         {{ adapter.quote("column01") }},
         {{ adapter.quote("column02") }},
@@ -20,7 +20,7 @@ renamed AS (
         {{ adapter.quote("column13") }},
         {{ adapter.quote("column14") }}
 
-    FROM source
+    from source
 )
 
-SELECT * FROM renamed
+select *, current_timestamp as _ts from renamed

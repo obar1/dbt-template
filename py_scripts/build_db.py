@@ -7,6 +7,8 @@ def load_ics_edu_datasets():
             db_conn.execute(url_ddl)
             print(f'loaded {sample_dataset} from {url_ddl}')
 
+        some_ddl = "CHECKPOINT;"
+        db_conn.execute(some_ddl)
 
 if __name__=='__main__':
     load_ics_edu_datasets()

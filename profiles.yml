@@ -4,3 +4,4 @@ dbt_pipes:
     dev:
       type: duckdb
       path: 'db.duckdb'
+      threads: 4

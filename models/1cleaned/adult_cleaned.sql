@@ -16,21 +16,21 @@ hours-per-week: continuous.
 native-country: United-States, Cambodia, England, Puerto-Rico, Canada, Germany, Outlying-US(Guam-USVI-etc), India, Japan, Greece, South, China, Cuba, Iran, Honduras, Philippines, Italy, Poland, Jamaica, Vietnam, Mexico, Portugal, Ireland, France, Dominican-Republic, Laos, Ecuador, Taiwan, Haiti, Columbia, Hungary, Guatemala, Nicaragua, Scotland, Thailand, Yugoslavia, El-Salvador, Trinadad&Tobago, Peru, Hong, Holand-Netherlands.
 
 #}
-SELECT
-    CAST(column00 AS INT) AS age,
-    TRIM(column01) AS workclass,
-    CAST(column02 AS FLOAT) AS fnlwgt,
-    TRIM(column03) AS education,
+select
+    cast(column00 as int) as age,
+    trim(column01) as workclass,
+    cast(column02 as float) as fnlwgt,
+    trim(column03) as education,
     column04,
     column05,
-    TRIM(column06) AS occupation,
+    trim(column06) as occupation,
     column07,
-    TRIM(column08) AS race,
-    TRIM(column09) AS sex,
-    CAST(column10 AS DECIMAL) AS capital_gain,
-    CAST(column11 AS DECIMAL) AS capital_loss,
+    trim(column08) as race,
+    trim(column09) as sex,
+    cast(column10 as decimal) as capital_gain,
+    cast(column11 as decimal) as capital_loss,
     column12,
-    TRIM(column13) AS native_country,
-    column14 AS income
+    trim(column13) as native_country,
+    column14 as income
 
-FROM {{ ref('base_raw_adult_raw') }}
+from {{ ref('base_raw_adult_raw') }}

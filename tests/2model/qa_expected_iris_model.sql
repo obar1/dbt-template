@@ -8,10 +8,10 @@
     b_relation=expected,
 ) }}
 {% else %}
-    SELECT null AS percent_of_total
+    select null as percent_of_total
 {% endif %}
 
-WHERE percent_of_total < 100
+where percent_of_total < 100
 {#
     TODO: conver this logic to a macro to encapsulate the logic
 #}

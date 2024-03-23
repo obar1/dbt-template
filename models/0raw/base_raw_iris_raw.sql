@@ -1,19 +1,19 @@
-WITH source AS (
+with source as (
 {% if var('MODE')  == 'QA' %}
     SELECT * FROM {{ ref('qa_iris_raw') }}
 {% else %}
-    SELECT * FROM {{ source('raw', 'iris_raw') }}
+    select * from {{ source('raw', 'iris_raw') }}
 {% endif %}
 ),
 
-renamed AS (
-    SELECT
+renamed as (
+    select
         {{ adapter.quote("column0") }},
         {{ adapter.quote("column1") }},
         {{ adapter.quote("column2") }},
         {{ adapter.quote("column3") }},
         {{ adapter.quote("column4") }}
-    FROM source
+    from source
 )
 
-SELECT * FROM renamed
+select * from renamed

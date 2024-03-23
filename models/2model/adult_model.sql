@@ -1,4 +1,4 @@
-SELECT
+select
     age,
     workclass,
     fnlwgt,
@@ -11,4 +11,4 @@ SELECT
     native_country,
     income,
     {{ convert_income('income') }} as income_converted
-FROM {{ ref('adult_cleaned') }}
+from {{ ref('adult_cleaned') }}

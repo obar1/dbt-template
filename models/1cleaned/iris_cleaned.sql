@@ -12,10 +12,10 @@
       -- Iris Virginica
 
 #}
-SELECT
-    CAST(column0 AS FLOAT) AS sepal_length,
-    CAST(column1 AS FLOAT) AS sepal_width,
-    CAST(column2 AS FLOAT) AS petal_length,
-    CAST(column3 AS FLOAT) AS petal_width,
-    UPPER(CAST(column4 AS STRING)) AS class
-FROM {{ ref('base_raw_iris_raw') }}
+select
+    cast(column0 as float) as sepal_length,
+    cast(column1 as float) as sepal_width,
+    cast(column2 as float) as petal_length,
+    cast(column3 as float) as petal_width,
+    upper(cast(column4 as string)) as class
+from {{ ref('base_raw_iris_raw') }}

@@ -4,4 +4,4 @@ from db.information_schema.tables t
 join information_schema.columns c
 using (table_name)
 order by 1,2,3,4
-) TO '../duckdb-metadata-export.csv' (HEADER, DELIMITER ',');
+) TO 'duckdb-metadata-export.csv' (HEADER, DELIMITER ',');

@@ -41,7 +41,7 @@ order by 1,2,3,4
 
 ```ps1
 cd py_scripts
-bq query --format=csv  --use_legacy_sql=false < bigquery-metadata-export.sql > ..\bigquery-metadata-export.csv
+bq query --format=csv  --use_legacy_sql=false < bigquery-metadata-export.sql > bigquery-metadata-export.csv
 ```
 https://cloud.google.com/bigquery/docs/information-schema-intro
 
@@ -61,7 +61,7 @@ STRING
 FLOAT64
 DATE
 
-we have to add the  db_id columnm
+we have to add the db_id columnm in the export to be used in the next step.. 
 
 
 

@@ -1,5 +1,8 @@
 venv0:
-	python -m venv .venv
+	python -m venv .venv && echo ". .venv/bin/activate"
+
+install0:
+	pip install --upgrade pip && pip install -r requirements.txt
 
 loaddb0:
 	python py_scripts/build_db.py 
@@ -7,8 +10,7 @@ loaddb0:
 connectdb0:
 	duckcli db.duckdb 	
 
-install:
-	pip install --upgrade pip && pip install -r requirements.txt
+
 
 qa:
 	dbt build --vars '{MODE:  QA}' --full-refresh

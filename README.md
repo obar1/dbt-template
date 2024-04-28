@@ -24,6 +24,11 @@ make connectdb0
 ```
 ![Alt text](others/image-1.png)
 
+- create fake seeds
+> handy to create sample data - especially when you have no accesa to  the actual data but you have metadata info
+
+[here](./py_scripts/fake_seeds.md)
+
 - run dbt 
 ```shell
 make run

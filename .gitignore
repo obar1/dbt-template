@@ -11,3 +11,4 @@ tmp
 dbt_packages
 
 export_edw
+*.csv

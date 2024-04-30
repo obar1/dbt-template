@@ -6,6 +6,8 @@ simple dbt project template with some models
 - load some data from http://archive.ics.uci.edu/ to local duckdb
 - simple dataflow using `dbt`
 
+- **fake_seeds**: adv seed moking [here](./py_scripts/fake_seeds/fake_seeds.md)
+
 ## makefile intreface for cmd line usage
 
 use makefile [here](./Makefile)

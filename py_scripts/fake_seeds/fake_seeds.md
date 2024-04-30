@@ -13,14 +13,7 @@ get the metadata as
 
 ### duckdb
 
-```sql
--- for duck_db
-select 'duck_db' as db_type, t.table_catalog, t.table_schema, t.table_name, column_name, data_type 
-from db.information_schema.tables t 
-join information_schema.columns c
-using (table_name)
-order by 1,2,3,4
-```
+template is [here](./duckdb-metadata-export.sql)
 
 ```shell
 cd py_scripts
@@ -31,13 +24,7 @@ https://duckdb.org/docs/sql/information_schema.html#information_schemaschemata-d
 
 ### bigquery
 
-```sql
--- for bigquery
-select 'bigquery' as db_id, table_catalog, table_schema, table_name, column_name, data_type 
-from zoominfo-public.zi_dataset_companies_under_1000_employees_offering_tuition.INFORMATION_SCHEMA.COLUMNS 
-order by 1,2,3,4
-
-```
+template is [here](./bigquery-metadata-export.sql)
 
 ```ps1
 cd py_scripts
@@ -65,5 +52,26 @@ we have to add the db_id columnm in the export to be used in the next step..
 
 
 
+## Using the metadata export
+
+Once you have the metadat csv export you can use it or add some `extra` :) 
+
+Samples: 
+- [bq](./bigquery-metadata-export.csv)
+- [duck](./duckdb-metadata-export.csv)
+
+
+run the code
+
+```bash
+$ cd py_scripts/fake_seeds/
+$ python fake_seeds.py ./bigquery-metadata-export.csv 
+```
+
+in metadata file you get some useful info
+
+![alt text](image.png)
+
+ex of some data
 
 

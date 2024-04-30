@@ -1,5 +1,6 @@
 import argparse
 import random
+import string
 from dataclasses import dataclass
 from typing import List
 import pandas as  pd
@@ -63,8 +64,18 @@ def generate_seed_metadata(fn_seed, column_records: List[ColumnRecord]):
     fn_seed = SEED_METADATA_PREFIX + fn_seed
     df.to_csv(fn_seed, index=False,sep=SEP, encoding='utf-8')
 
+
+
+
 def get_rnd_data(cr: ColumnRecord, n_rows = N_ROWS) -> List[str]:
-    
+    def _get_rnd_data_no_extra(cr:ColumnRecord):
+        if cr.column_type == "INT64":
+            return random.randint(0,100)
+        if cr.column_type == "NUMERIC":
+            return random.uniform(0,100)
+        if cr.column_type == "STRING":
+            return "".join(random.choice(string.ascii_letters) for _ in range(10))
+
     def  _get_rnd_data_with_extra(cr:ColumnRecord, sep = SEP_PIPE):
         """supported 
         pattern
@@ -72,22 +83,23 @@ def get_rnd_data(cr: ColumnRecord, n_rows = N_ROWS) -> List[str]:
         range
         """
         extra : str = cr.extra
-        if "pattern=" in extra:
-            pattern:  str = extra.split("pattern=")[1]
-            return exrex.getone(pattern)
-        if "list=" in extra:
-            options: List[str] = extra.split("list=")[1].split(sep)
-            return random.choice(options)
-        if "range=" in extra:
-            min, max= extra.split("range=")[1].split(sep)
-            return random.randint(int(min), int(max))
-        return "TODO"
+        if  cr.extra != None:
+            if "pattern=" in extra:
+                pattern:  str = extra.split("pattern=")[1]
+                return exrex.getone(pattern)
+            if "list=" in extra:
+                options: List[str] = extra.split("list=")[1].split(sep)
+                return random.choice(options)
+            if "range=" in extra:
+                min, max= extra.split("range=")[1].split(sep)
+                return random.randint(int(min), int(max))
+        return _get_rnd_data_no_extra(cr)
     res = []
     for i in range(0, n_rows):
         if cr.extra != None:
             res.append(_get_rnd_data_with_extra(cr))
         else:
-            res.append('') # empty
+            res.append(_get_rnd_data_no_extra(cr))
     return res
         
 def generate_seed_data(fn_seed, column_records: List[ColumnRecord]):
@@ -96,7 +108,6 @@ def generate_seed_data(fn_seed, column_records: List[ColumnRecord]):
     """
     df = pd.DataFrame(column_records)
     fn_seed = SEED_DATA_PREFIX + fn_seed
-    # df.to_csv(fn_seed, index=False,sep=SEP, encoding='utf-8')
     seed_data = {}
     for cr in column_records:
         seed_data[cr.column_name] = get_rnd_data(cr)

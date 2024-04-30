@@ -65,8 +65,8 @@ Samples:
 ```bash
 $ cd py_scripts/fake_seeds/
 
-$ python fake_seeds.py bigquery-metadata-export.csv 
-$ python fake_seeds.py duckdb-metadata-export.csv 
+$ python fake_seeds.py bigquery-metadata-export.csv 100000
+$ python fake_seeds.py duckdb-metadata-export.csv 50000
 ```
 
 ex:
@@ -99,3 +99,9 @@ supported:
 - regex pattern
 - list from values
 - min and man ranges
+
+## demo
+
+simple demo [here](./demo.sh)
+
+![alt text](image-3.png)

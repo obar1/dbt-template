@@ -51,7 +51,6 @@ DATE
 we have to add the db_id columnm in the export to be used in the next step.. 
 
 
-
 ## Using the metadata export
 
 Once you have the metadat csv export you can use it or add some `extra` :) 
@@ -60,18 +59,43 @@ Samples:
 - [bq](./bigquery-metadata-export.csv)
 - [duck](./duckdb-metadata-export.csv)
 
+## Running the code
 
-run the code
 
 ```bash
 $ cd py_scripts/fake_seeds/
-$ python fake_seeds.py ./bigquery-metadata-export.csv 
+
+$ python fake_seeds.py bigquery-metadata-export.csv 
+$ python fake_seeds.py duckdb-metadata-export.csv 
 ```
 
-in metadata file you get some useful info
+ex:
+- metadata 
 
 ![alt text](image.png)
 
-ex of some data
+- seed data
+![alt text](image-1.png)
 
+> run again python code and data changes each time
+![alt text](image-2.png)
 
+## extra
+you can add extra column and make some customization so data is more useful in the real  dbt project
+
+ex
+```
+db_id,table_catalog,table_schema,table_name,column_name,data_type,extra
+bigquery,bigquery-public-data,austin_bikeshare,bikeshare_stations,station_id,INT64,pattern=^[A-Z]{3}XXXX[0-9]{2}$
+...
+bigquery,bigquery-public-data,austin_bikeshare,bikeshare_stations,status,STRING,list=active|closed
+...
+bigquery,bigquery-public-data,austin_bikeshare,bikeshare_stations,footprint_length,INT64,range=20|40
+bigquery,bigquery-public-data,austin_bikeshare,bikeshare_stations,footprint_width,FLOAT64,
+```
+
+supported:
+
+- regex pattern
+- list from values
+- min and man ranges

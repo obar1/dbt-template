@@ -1,9 +1,9 @@
 db_id,table_catalog,table_schema,table_name,column_name,data_type,extra
-duckdb,db,main,adult_raw,column14,VARCHAR,
+duckdb,db,main,adult_raw,column14,VARCHAR,pattern=^[A-Z]{3}YYYY[A-Z]{5}$
 duckdb,db,main,adult_raw,column09,VARCHAR,
 duckdb,db,main,adult_raw,column01,VARCHAR,
 duckdb,db,main,adult_raw,column13,VARCHAR,
-duckdb,db,main,adult_raw,column02,BIGINT,
+duckdb,db,main,adult_raw,column02,BIGINT,range=10|1000
 duckdb,db,main,adult_raw,column03,VARCHAR,
 duckdb,db,main,adult_raw,column12,BIGINT,
 duckdb,db,main,adult_raw,column04,BIGINT,

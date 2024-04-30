@@ -83,7 +83,7 @@ def get_rnd_data(cr: ColumnRecord, db_id, n_rows=N_ROWS) -> List[str]:
             if cr.column_type == "VARCHAR":
                 return "".join(random.choice(string.ascii_letters) for _ in range(10))
         else:
-            ValueError(f'{db_id} not supported')
+            raise ValueError(f'{db_id} not supported')
 
     def  _get_rnd_data_with_extra(cr: ColumnRecord,  db_id,sep=SEP_PIPE):
         """supported 

@@ -5,7 +5,7 @@
 > if you are in the data-eng field, you might be familiar with this ...
 
 
-## export metadata
+## Export metadata
 
 > currently supporting duckdb and biquery
 
@@ -32,7 +32,7 @@ bq query --format=csv  --use_legacy_sql=false < bigquery-metadata-export.sql > b
 ```
 https://cloud.google.com/bigquery/docs/information-schema-intro
 
-as 
+```
 for `duckdb` we have
 +-----------+
 | BIGINT    |
@@ -41,17 +41,16 @@ for `duckdb` we have
 +-----------+
 
 for `bigquery` we have
-
 data_type
 INT64
 STRING
 FLOAT64
 DATE
+```
 
 we have to add the db_id columnm in the export to be used in the next step.. 
 
-
-## Using the metadata export
+## Reviewing the metadata export
 
 Once you have the metadat csv export you can use it or add some `extra` :) 
 
@@ -59,29 +58,7 @@ Samples:
 - [bq](./bigquery-metadata-export.csv)
 - [duck](./duckdb-metadata-export.csv)
 
-## Running the code
-
-
-```bash
-$ cd py_scripts/fake_seeds/
-
-$ python fake_seeds.py bigquery-metadata-export.csv 100000
-$ python fake_seeds.py duckdb-metadata-export.csv 50000
-```
-
-ex:
-- metadata 
-
-![alt text](image.png)
-
-- seed data
-![alt text](image-1.png)
-
-> run again python code and data changes each time
-![alt text](image-2.png)
-
-## extra
-you can add extra column and make some customization so data is more useful in the real  dbt project
+you can add `extra` column and make some customization so data is more useful in the real  dbt project
 
 ex
 ```
@@ -99,6 +76,29 @@ supported:
 - regex pattern
 - list from values
 - min and man ranges
+
+
+## Running the code
+
+```bash
+$ cd py_scripts/fake_seeds/
+
+$ python fake_seeds.py bigquery-metadata-export.csv 100000
+$ python fake_seeds.py duckdb-metadata-export.csv 50000
+```
+
+ex:
+- metadata 
+
+![alt text](image.png)
+
+- seed data
+
+![alt text](image-1.png)
+
+> run again python code and data changes each time
+
+![alt text](image-2.png)
 
 ## demo
 

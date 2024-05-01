@@ -1,10 +1,15 @@
 with source as (
-    select * from {{ source('raw', 'population_by_zip_2000_init') }}
+    select * from {{ source('raw', 'population_by_zip_2000') }}
 ),
 
 renamed as (
     select
-{{ adapter.quote("zipcode") }},{{ adapter.quote("geo_id") }},{{ adapter.quote("minimum_age") }},{{ adapter.quote("maximum_age") }},{{ adapter.quote("gender") }},{{ adapter.quote("population") }},
+{{ adapter.quote("zipcode") }},
+{{ adapter.quote("geo_id") }},
+{{ adapter.quote("minimum_age") }},
+{{ adapter.quote("maximum_age") }},
+{{ adapter.quote("gender") }},
+{{ adapter.quote("population") }},
 
 
     from source

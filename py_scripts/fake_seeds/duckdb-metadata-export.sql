@@ -9,5 +9,7 @@ COPY (
     FROM db.information_schema.tables t 
     JOIN information_schema.columns c
     USING (table_name)
+    where table_name IN ('population_by_zip_2000',
+    'population_by_zip_2010')
     ORDER BY 1,2,3,4
 ) TO 'duckdb-metadata-export.csv' (HEADER, DELIMITER ',');

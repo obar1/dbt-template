@@ -9,8 +9,6 @@ Very often when working on new data projects you might have access to `some` met
 
 > currently supporting duckdb and bigquery
 
-
-
 get the metadata from:
 
 ### duckdb

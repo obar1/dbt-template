@@ -5,6 +5,5 @@ sources:
     database: db  
     schema: main  
     tables:
-      - name: iris_raw
-      - name: wine_raw
-      - name: adult_raw
+      - name: population_by_zip_2000
+      - name: population_by_zip_2010

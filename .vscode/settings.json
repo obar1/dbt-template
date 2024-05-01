@@ -4,5 +4,12 @@
     "sonarlint.connectedMode.project": {
         "connectionId": "token",
         "projectKey": "obar1_dbt-template"
-    }
+    },
+    "grammarly.selectors": [
+        {
+            "language": "markdown",
+            "scheme": "file",
+            "pattern": "py_scripts/fake_seeds/fake_seeds.md"
+        }
+    ]
 }

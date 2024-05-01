@@ -7,12 +7,13 @@ SELECT
   data_type,
   CAST(NULL AS string) extra
 FROM
-  bigquery-public-data.austin_bikeshare.INFORMATION_SCHEMA.COLUMNS
+  bigquery-public-data.census_bureau_usa.INFORMATION_SCHEMA.COLUMNS
 WHERE
-  table_name IN ('bikeshare_stations',
-    'bikeshare_trips')
+  table_name IN ('population_by_zip_2000',
+    'population_by_zip_2010')
 ORDER BY
   1,
   2,
   3,
   4
+

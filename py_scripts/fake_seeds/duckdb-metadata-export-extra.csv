@@ -1,0 +1,6 @@
+db_id,table_catalog,table_schema,table_name,column_name,data_type,extra
+duckdb,db,main,population_by_zip_2000,population,BIGINT,range=0|143987
+duckdb,db,main,population_by_zip_2000,gender,VARCHAR,list=male|female|null
+duckdb,db,main,population_by_zip_2000,maximum_age,BIGINT,range=1|99
+duckdb,db,main,population_by_zip_2000,minimum_age,BIGINT,range=1|99
+duckdb,db,main,population_by_zip_2000,geo_id,VARCHAR,pattern=^8600000US[0-9]{5}$

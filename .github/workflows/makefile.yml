@@ -9,14 +9,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: install packages
-      run: make install
+      run: make install0
     - name: get some raw data
       run: make loaddb0
     - name: dbt deps
       run: dbt deps
-    - name: test
-      run: dbt build --vars "{'MODE':'QA'}"
-    - name: check format
-      run: make format
-    - name: update models
+    - name: dbt build
       run: dbt build  

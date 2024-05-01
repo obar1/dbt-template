@@ -1,5 +1,6 @@
 import argparse
 import random
+import secrets
 import string
 
 import pandas as pd
@@ -18,7 +19,7 @@ SEED_METADATA_PREFIX = "$metadata_"
 SEED_DATA_PREFIX = "$moke_"
 SEP_CSV = ","
 SEP_PIPE = "|"
-
+ONE_HUNDRED = 100
 
 @dataclass
 class ColumnRecord:
@@ -76,14 +77,14 @@ def get_rnd_data_no_extra(cr: ColumnRecord, db_id):
         """get_rnd_data with no_extra"""
         if db_id == BIGQUERY:
             if cr.column_type == "INT64":
-                return random.randint(0, 100)
+                return secrets.randbelow(ONE_HUNDRED)
             if cr.column_type == "NUMERIC":
                 return random.uniform(0, 100)
             if cr.column_type == "STRING":
                 return "".join(random.choice(string.ascii_letters) for _ in range(10))
         elif db_id == DUCKDB:
             if cr.column_type == "BIGINT":
-                return random.randint(0, 100)
+                return secrets.randbelow(ONE_HUNDRED)
             if cr.column_type == "DOUBLE":
                 return random.uniform(0, 100)
             if cr.column_type == "VARCHAR":
@@ -116,7 +117,6 @@ def get_rnd_data_with_extra(cr: ColumnRecord, db_id, sep=SEP_PIPE):
 
 def get_rnd_data(cr: ColumnRecord, db_id, n_rows) -> List[str]:
     """get rnd_data"""
-
 
     res = []
     for _ in range(0, n_rows):

@@ -1,4 +1,8 @@
 {
     "dbt.queryLimit": 100,
-    "dbt.enableNewLineagePanel": true
+    "dbt.enableNewLineagePanel": true,
+    "sonarlint.connectedMode.project": {
+        "connectionId": "token",
+        "projectKey": "obar1_dbt-template"
+    }
 }

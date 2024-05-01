@@ -1,5 +1,6 @@
 import argparse
 import random
+import secrets
 import string
 
 import pandas as pd
@@ -12,13 +13,13 @@ from typing import List
 DUCKDB = "duckdb"
 BIGQUERY = "bigquery"
 
-CSV_SUFFFIX = ".csv"
+CSV_SUFFIX = ".csv"
 DB_ID_COLUMN = "db_id"
 SEED_METADATA_PREFIX = "$metadata_"
 SEED_DATA_PREFIX = "$moke_"
-SEP = ","
+SEP_CSV = ","
 SEP_PIPE = "|"
-
+ONE_HUNDRED = 100
 
 @dataclass
 class ColumnRecord:
@@ -35,15 +36,15 @@ def parse_input():
     """parse_input
 
     Raises:
-        Exception: if csv is not used
+        ValueError: if csv is not used
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("fn_metadata")
     parser.add_argument("n_rows")
 
     args = parser.parse_args()
-    if CSV_SUFFFIX not in args.fn_metadata:
-        raise Exception("use csv export as in readme")
+    if CSV_SUFFIX not in args.fn_metadata:
+        raise ValueError("use csv export as in readme")
     return args
 
 
@@ -70,32 +71,28 @@ def generate_seed_metadata(fn_seed, column_records: List[ColumnRecord]):
     """generate_seed_metadata"""
     df = pd.DataFrame(column_records)
     fn_seed = SEED_METADATA_PREFIX + fn_seed
-    df.to_csv(fn_seed, index=False, sep=SEP, encoding="utf-8")
+    df.to_csv(fn_seed, index=False, sep=SEP_CSV, encoding="utf-8")
 
-
-def get_rnd_data(cr: ColumnRecord, db_id, n_rows) -> List[str]:
-    """get rnd_data"""
-
-    def _get_rnd_data_no_extra(cr: ColumnRecord, db_id):
+def get_rnd_data_no_extra(cr: ColumnRecord, db_id):
         """get_rnd_data with no_extra"""
         if db_id == BIGQUERY:
             if cr.column_type == "INT64":
-                return random.randint(0, 100)
+                return secrets.randbelow(ONE_HUNDRED)
             if cr.column_type == "NUMERIC":
-                return random.uniform(0, 100)
+                return secrets.SystemRandom().uniform(0, ONE_HUNDRED)
             if cr.column_type == "STRING":
                 return "".join(random.choice(string.ascii_letters) for _ in range(10))
         elif db_id == DUCKDB:
             if cr.column_type == "BIGINT":
-                return random.randint(0, 100)
+                return secrets.randbelow(ONE_HUNDRED)
             if cr.column_type == "DOUBLE":
-                return random.uniform(0, 100)
+                return secrets.SystemRandom().uniform(0, ONE_HUNDRED)
             if cr.column_type == "VARCHAR":
                 return "".join(random.choice(string.ascii_letters) for _ in range(10))
         else:
             raise ValueError(f"{db_id} not supported")
 
-    def _get_rnd_data_with_extra(cr: ColumnRecord, db_id, sep=SEP_PIPE):
+def get_rnd_data_with_extra(cr: ColumnRecord, db_id, sep=SEP_PIPE):
         """supported
         pattern
         list
@@ -114,16 +111,19 @@ def get_rnd_data(cr: ColumnRecord, db_id, n_rows) -> List[str]:
                 options: List[str] = extra.split("list=")[1].split(sep)
                 return random.choice(options)
             if "range=" in extra:
-                min, max = extra.split("range=")[1].split(sep)
-                return random.randint(int(min), int(max))
-        return _get_rnd_data_no_extra(cr, db_id)
+                min_range, max_range = extra.split("range=")[1].split(sep)
+                return secrets.randbelow(int(max_range) - int(min_range) + 1) + int(min_range)
+        return get_rnd_data_no_extra(cr, db_id)
+
+def get_rnd_data(cr: ColumnRecord, db_id, n_rows) -> List[str]:
+    """get rnd_data"""
 
     res = []
-    for i in range(0, n_rows):
+    for _ in range(0, n_rows):
         if cr.extra is not None:
-            res.append(_get_rnd_data_with_extra(cr, db_id))
+            res.append(get_rnd_data_with_extra(cr, db_id))
         else:
-            res.append(_get_rnd_data_no_extra(cr, db_id))
+            res.append(get_rnd_data_no_extra(cr, db_id))
     return res
 
 
@@ -144,13 +144,13 @@ def generate_seed_data(fn_seed, column_records: List[ColumnRecord], db_id, n_row
 def generate_seeds(tables: dict, db_id, n_rows):
     """generate seeds"""
 
-    def _get_fn_seed(k: str):
+    def get_fn_seed(k: str):
         """fn seed"""
-        return k.lower().replace(",", "_").replace("-", "_") + CSV_SUFFFIX
+        return k.lower().replace(",", "_").replace("-", "_") + CSV_SUFFIX
 
     for k, v in tables.items():
         column_records: List[ColumnRecord] = v
-        fn_seed: str = _get_fn_seed(k)
+        fn_seed: str = get_fn_seed(k)
 
         print(f"Working on {k}...")
         generate_seed_metadata(fn_seed, column_records)
@@ -161,7 +161,7 @@ def check_metadata(args):
     """check metadata"""
     df = pd.read_csv(args.fn_metadata)
     if DB_ID_COLUMN not in df.columns:
-        raise Exception("use sql export snippets as in readme")
+        raise ValueError("use sql export snippets as in readme")
 
     return df["db_id"].unique().take(0), df, int(args.n_rows)
 

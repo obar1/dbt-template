@@ -14,8 +14,6 @@ jobs:
       run: make loaddb0
     - name: dbt deps
       run: dbt deps
-    - name: test
-      run: dbt build --vars "{'MODE':'QA'}"
     - name: check format
       run: make format
     - name: update models

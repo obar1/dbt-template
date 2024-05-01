@@ -1,1 +1,13 @@
 db_id,table_catalog,table_schema,table_name,column_name,data_type,extra
+duckdb,db,main,population_by_zip_2000,population,BIGINT,
+duckdb,db,main,population_by_zip_2000,gender,VARCHAR,
+duckdb,db,main,population_by_zip_2000,maximum_age,BIGINT,
+duckdb,db,main,population_by_zip_2000,minimum_age,BIGINT,
+duckdb,db,main,population_by_zip_2000,geo_id,VARCHAR,
+duckdb,db,main,population_by_zip_2000,zipcode,VARCHAR,
+duckdb,db,main,population_by_zip_2010,gender,VARCHAR,
+duckdb,db,main,population_by_zip_2010,maximum_age,VARCHAR,
+duckdb,db,main,population_by_zip_2010,minimum_age,BIGINT,
+duckdb,db,main,population_by_zip_2010,population,BIGINT,
+duckdb,db,main,population_by_zip_2010,zipcode,BIGINT,
+duckdb,db,main,population_by_zip_2010,geo_id,VARCHAR,

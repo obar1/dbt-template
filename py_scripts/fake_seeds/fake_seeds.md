@@ -18,8 +18,8 @@ https://duckdb.org/docs/sql/information_schema.html#information_schemaschemata-d
 template is [here](./duckdb-metadata-export.sql)
 
 ```shell
-cd py_scripts
-duckcli ../db.duckdb < duckdb-metadata-export.sql 
+cd py_scripts/fake_seeds
+duckcli  ../../db.duckdb < duckdb-metadata-export.sql
 ```
 
 
@@ -30,7 +30,7 @@ https://cloud.google.com/bigquery/docs/information-schema-intro
 template is [here](./bigquery-metadata-export.sql)
 
 ```ps1
-cd py_scripts
+cd py_scripts/fake_seeds
 bq query --format=csv  --use_legacy_sql=false < bigquery-metadata-export.sql > bigquery-metadata-export.csv
 ```
 
@@ -67,16 +67,6 @@ Samples:
 
 you can add `extra` column and make some customization so data is more useful in the real  dbt project
 
-ex
-```
-db_id,table_catalog,table_schema,table_name,column_name,data_type,extra
-bigquery,bigquery-public-data,austin_bikeshare,bikeshare_stations,station_id,INT64,pattern=^[A-Z]{3}XXXX[0-9]{2}$
-...
-bigquery,bigquery-public-data,austin_bikeshare,bikeshare_stations,status,STRING,list=active|closed
-...
-bigquery,bigquery-public-data,austin_bikeshare,bikeshare_stations,footprint_length,INT64,range=20|40
-bigquery,bigquery-public-data,austin_bikeshare,bikeshare_stations,footprint_width,FLOAT64,
-```
 
 supported:
 
@@ -85,30 +75,49 @@ supported:
 - min and man ranges
 
 
+ex
+```
+pattern=^[A-Z]{3}XXXX[0-9]{2}$
+list=active|closed
+range=20|40
+```
+
 ## Running the code
 
 ```bash
-$ cd py_scripts/fake_seeds/
+cd py_scripts/fake_seeds/
 
-$ python fake_seeds.py bigquery-metadata-export.csv 100000
-$ python fake_seeds.py duckdb-metadata-export.csv 50000
+python fake_seeds.py bigquery-metadata-export.csv 100000
+python fake_seeds.py duckdb-metadata-export.csv 50000
 ```
-
-ex:
-- metadata 
-
-![alt text](image.png)
-
-- seed data
-
-![alt text](image-1.png)
-
-> run again python code and data changes each time
-
-![alt text](image-2.png)
 
 ## demo
 
 simple demo [here](./demo.sh)
 
+## extra demo
+
+these table come from bq sample dataset
+
+![alt text](image.png)
+
+Number of rows
+1,586,081
+
+we can tune the [metadata](./duckdb-metadata-export.csv) with `extra` looking at the real data
+
+![alt text](image-1.png)
+
+[metadata-extra](./duckdb-metadata-export-extra.csv)
+
+you run  and get the new data
+
+python fake_seeds.py duckdb-metadata-export-extra.csv 3000000
+
 ![alt text](image-3.png)
+
+> a couple of mins -  this is not performant parallel code -  but it works
+> and contents looks ok :) just `dbt seed` the csv and we have new synthetic data...
+
+![alt text](image-2.png)
+

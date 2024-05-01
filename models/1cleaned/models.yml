@@ -1,29 +1,26 @@
 models:
-  - name: iris_cleaned
-    description: "iris cleaned"
+  - name: population_by_zip_2000_cleaned
     columns:
-      - name: sepal_length
-        description: ""
-      - name: sepal_width
-        description: ""
-      - name: petal_length
-        description: ""
-      - name: petal_width
-        description: ""
-      - name: class
-        description: ""
+      - name: zipcode
+      - name: geo_id
+      - name: minimum_age
+      - name: maximum_age
+      - name: gender
         tests:
           - not_null
+      - name: population
       - name: _ts
         description: "ts load"
-  - name: adult_cleaned
-    tests:
-    - dbt_utils.expression_is_true:
-        expression: "capital_loss is not null or capital_gain is not null"
+
+  - name: population_by_zip_2010_cleaned
     columns:
-      - name: sex
+      - name: zipcode
+      - name: geo_id
+      - name: minimum_age
+      - name: maximum_age
+      - name: gender
         tests:
-          - accepted_values:
-              values: ['Male','Female']
-      - name: capital_gain
-      - name: capital_loss
+          - not_null
+      - name: population
+      - name: _ts
+        description: "ts load"

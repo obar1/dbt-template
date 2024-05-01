@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: install packages
-      run: make install
+      run: make install0
     - name: get some raw data
       run: make loaddb0
     - name: dbt deps

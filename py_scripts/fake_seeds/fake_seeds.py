@@ -79,14 +79,14 @@ def get_rnd_data_no_extra(cr: ColumnRecord, db_id):
             if cr.column_type == "INT64":
                 return secrets.randbelow(ONE_HUNDRED)
             if cr.column_type == "NUMERIC":
-                return random.uniform(0, 100)
+                return secrets.SystemRandom().uniform(0, ONE_HUNDRED)
             if cr.column_type == "STRING":
                 return "".join(random.choice(string.ascii_letters) for _ in range(10))
         elif db_id == DUCKDB:
             if cr.column_type == "BIGINT":
                 return secrets.randbelow(ONE_HUNDRED)
             if cr.column_type == "DOUBLE":
-                return random.uniform(0, 100)
+                return secrets.SystemRandom().uniform(0, ONE_HUNDRED)
             if cr.column_type == "VARCHAR":
                 return "".join(random.choice(string.ascii_letters) for _ in range(10))
         else:
@@ -112,7 +112,7 @@ def get_rnd_data_with_extra(cr: ColumnRecord, db_id, sep=SEP_PIPE):
                 return random.choice(options)
             if "range=" in extra:
                 min_range, max_range = extra.split("range=")[1].split(sep)
-                return random.randint(int(min_range), int(max_range))
+                return secrets.randbelow(int(max_range) - int(min_range) + 1) + int(min_range)
         return get_rnd_data_no_extra(cr, db_id)
 
 def get_rnd_data(cr: ColumnRecord, db_id, n_rows) -> List[str]:

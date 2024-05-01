@@ -1,17 +1,21 @@
 # fake dbt seed
 
-> given `some` metadata we want to create `some` meaningful dbt seeds with little intervention...
-> while we get access to dev data or masked pre-pord exports :) 
-> if you are in the data-eng field, you might be familiar with this ...
+Very often when working on new data projects you might have access to `some` metadata but not the actual `data` but you want to create `some` meaningful dbt seeds with little intervention... to explore the actual requirements to deliver new dbt models.
+> while we get access to dev data or masked pre-prod exports :) 
+> if you are in the data eng field, you might be familiar with this ...
 
 
 ## Export metadata
 
-> currently supporting duckdb and biquery
+> currently supporting duckdb and bigquery
 
-get the metadata as
+
+
+get the metadata from:
 
 ### duckdb
+
+https://duckdb.org/docs/sql/information_schema.html#information_schemaschemata-database-catalog-and-schema
 
 template is [here](./duckdb-metadata-export.sql)
 
@@ -20,9 +24,10 @@ cd py_scripts
 duckcli ../db.duckdb < duckdb-metadata-export.sql 
 ```
 
-https://duckdb.org/docs/sql/information_schema.html#information_schemaschemata-database-catalog-and-schema
+
 
 ### bigquery
+https://cloud.google.com/bigquery/docs/information-schema-intro
 
 template is [here](./bigquery-metadata-export.sql)
 
@@ -30,7 +35,10 @@ template is [here](./bigquery-metadata-export.sql)
 cd py_scripts
 bq query --format=csv  --use_legacy_sql=false < bigquery-metadata-export.sql > bigquery-metadata-export.csv
 ```
-https://cloud.google.com/bigquery/docs/information-schema-intro
+
+### diff
+
+each one is a bit different about the metadata export:
 
 ```
 for `duckdb` we have
@@ -48,11 +56,12 @@ FLOAT64
 DATE
 ```
 
-we have to add the db_id columnm in the export to be used in the next step.. 
+
+we add the db_id column in the export to be used in the next step...
 
 ## Reviewing the metadata export
 
-Once you have the metadat csv export you can use it or add some `extra` :) 
+Once you have the metadata csv export you can use it or add some `extra` :) 
 
 Samples: 
 - [bq](./bigquery-metadata-export.csv)

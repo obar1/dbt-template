@@ -3,12 +3,14 @@
 [![dbt template CI on github](https://github.com/obar1/dbt-template/actions/workflows/makefile.yml/badge.svg)](https://github.com/obar1/dbt-template/actions/workflows/makefile.yml)
 
 simple dbt project template with some models
-- load some data from http://archive.ics.uci.edu/ to local duckdb
-- simple dataflow using `dbt`
-
+- load some csv export to local **duckdb** for local-first dev
 - **fake_seeds**: adv seed moking [here](./py_scripts/fake_seeds/fake_seeds.md)
 
-## makefile intreface for cmd line usage
+> data samples from
+> https://console.cloud.google.com/marketplace/product/united-states-census-bureau/us-census-data?project=future-force-421706
+> ![alt text](image.png)
+
+## makefile interface for cmd line usage
 
 use makefile [here](./Makefile)
 
@@ -18,13 +20,11 @@ use makefile [here](./Makefile)
 ```shell
 make loaddb0
 ```
-![Alt text](others/image-0.png)
 
 - have a look at the data loaded
 ```shell
 make connectdb0
 ```
-![Alt text](others/image-1.png)
 
 - create fake seeds
 > handy to create sample data - especially when you have no accesa to  the actual data but you have metadata info
@@ -35,17 +35,11 @@ make connectdb0
 ```shell
 make run
 ```
-![Alt text](others/image-2.png)
 
 - have a look at the models generated
 ```shell
 make connectdb0
 ```
-![Alt text](others/image-3.png)
-
-![Alt text](others/image-4.png)
-...
-![Alt text](others/image-5.png)
 
 > do the same for wine ... :)
 

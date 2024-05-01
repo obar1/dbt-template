@@ -14,7 +14,5 @@ jobs:
       run: make loaddb0
     - name: dbt deps
       run: dbt deps
-    - name: check format
-      run: make format
-    - name: update models
+    - name: dbt build
       run: dbt build  

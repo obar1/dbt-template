@@ -59,24 +59,24 @@ we add the db_id column in the export to be used in the next step...
 
 ## Reviewing the metadata export
 
-Once you have the metadata csv export you can use it or add some `extra` :) 
+Once you have the metadata csv export 
 
 Samples: 
 - [bq](./bigquery-metadata-export.csv)
 - [duck](./duckdb-metadata-export.csv)
 
-you can add `extra` column and make some customization so data is more useful in the real  dbt project
+you can add `extra` column and make some customization so data is more useful in the real dbt project
 
 
 supported:
 
 - regex pattern
 - list from values
-- min and man ranges
+- min and max ranges
 
 
 ex
-```
+```py
 pattern=^[A-Z]{3}XXXX[0-9]{2}$
 list=active|closed
 range=20|40
@@ -91,32 +91,33 @@ python fake_seeds.py bigquery-metadata-export.csv 100000
 python fake_seeds.py duckdb-metadata-export.csv 50000
 ```
 
-## demo
 
-simple demo [here](./demo.sh)
+## Running the code with extra info
 
-## extra demo
-
-these table come from bq sample dataset
+These tables come from bq sample dataset
 
 ![alt text](image.png)
 
+```
 Number of rows
 1,586,081
+```
 
-we can tune the [metadata](./duckdb-metadata-export.csv) with `extra` looking at the real data
+we can tune the [metadata](./duckdb-metadata-export.csv) with `extra` setting, just looking at the real data
 
 ![alt text](image-1.png)
 
+sample here 
 [metadata-extra](./duckdb-metadata-export-extra.csv)
 
-you run  and get the new data
+simply run and create the new synthetic data
 
+```bash
 python fake_seeds.py duckdb-metadata-export-extra.csv 3000000
-
+```
 ![alt text](image-3.png)
 
-> a couple of mins -  this is not performant parallel code -  but it works
+> a couple of mins,,,`this is not performant parallel code`  but it works
 > and contents looks ok :) just `dbt seed` the csv and we have new synthetic data...
 
 ![alt text](image-2.png)
